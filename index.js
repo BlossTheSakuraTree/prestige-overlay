@@ -20,7 +20,9 @@ app.get('/player/:tag/:apiKey', async (req, res) => {
     );
     res.json(response.data);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch player stats' });
+    res.status(500).json({ 
+      error: error.response?.data || error.message
+    });
   }
 });
 
@@ -32,4 +34,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
 
